@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Llistat de usuaris{% endblock %}
+{% block body %}
+    <h1>Llistat de usuaris</h1>
+    <a href="{{ path('usuari_new') }}">+ Nou usuari</a>
+    {% for message in app.flashes('notice') %}
+        <strong>Success!</strong> {{ message }}
+    {% endfor %}
+    <table style="margin-top: 20px;margin-bottom: 10px;">
+        <thead>
+        <tr>
+            <th>Username</th><th>Password</th><th>Validat</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for usuari in usuaris %}
+            <tr>
+                <td>{{ usuari.username }}</td><td>{{ usuari.password }}</td><td>
+                    {% if  usuari.validat == 1 %}
+                             SI
+                        {% else %}
+                            NO
+                    {% endif %}
+                </td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hi ha usuaris.</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <br>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat de clients{% endblock %}
+{% block body %}
+    <h1>Llistat de clients</h1>
+    <a href="{{ path('client_new') }}">+ Nou compte</a>
+
+    {% for message in app.flashes('notice') %}
+        <strong>Success!</strong> {{ message }}
+    {% endfor %}
+
+    <table style="margin-top: 20px;margin-bottom: 10px;">
+        <thead>
+        <tr>
+            <th>Codi</th><th>Saldo</th><th>Client</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td><td>{{ client.nom }}</td><td>{{ client.dni }}</td>
+                <td>
+                    <a href="{{ path('client_delete', {'id': client.id}) }}">Eliminar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No hi ha clients.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+
+{% endblock %}
